@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Audiolibro de Mamá Tere — Guía del oyente</title>
+<style>
+:root{
+  --paper:#faf6ef; --ink:#2b2620; --muted:#6f6355;
+  --accent:#8c2f1b; --accent-2:#c4703f; --card:#fffdf8;
+  --line:#e4d9c6; --shadow:0 2px 14px rgba(60,40,20,.08);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:Georgia,'Times New Roman',serif;background:var(--paper);color:var(--ink);line-height:1.65;font-size:17px}
+.wrap{max-width:760px;margin:0 auto;padding:0 20px}
+header.mast{background:linear-gradient(160deg,#3a2418,#6b3a1e);color:#f7ecdc;padding:56px 0 44px;text-align:center}
+header.mast .kicker{font-family:system-ui,sans-serif;font-size:.8rem;letter-spacing:.18em;text-transform:uppercase;color:#e8c88f;margin-bottom:14px}
+header.mast h1{font-size:clamp(1.9rem,6vw,2.9rem);line-height:1.2;margin-bottom:12px;font-weight:700}
+header.mast p.lede{max-width:560px;margin:0 auto;color:#e5d5ba;font-size:1.05rem}
+nav.toc{background:#efe4d0;border-bottom:1px solid var(--line);padding:12px 0;position:sticky;top:0;z-index:50}
+nav.toc .wrap{display:flex;gap:18px;flex-wrap:wrap;justify-content:center}
+nav.toc a{font-family:system-ui,sans-serif;font-size:.85rem;color:var(--accent);text-decoration:none;font-weight:600}
+nav.toc a:hover{text-decoration:underline}
+section.block{padding:44px 0;border-bottom:1px solid var(--line)}
+section.block h2{font-size:1.6rem;margin-bottom:6px;color:var(--accent)}
+section.block .sub{color:var(--muted);margin-bottom:22px;font-style:italic}
+.audio-part{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:20px;margin-bottom:16px;box-shadow:var(--shadow)}
+.audio-part h3{font-size:1.15rem;margin-bottom:4px}
+.audio-part .meta{font-family:system-ui,sans-serif;font-size:.8rem;color:var(--muted);margin-bottom:12px}
+.audio-part audio{width:100%;margin-bottom:10px}
+.audio-part .row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.btn-toggle{font-family:system-ui,sans-serif;font-size:.8rem;background:none;border:1px solid var(--accent-2);color:var(--accent);border-radius:20px;padding:6px 16px;cursor:pointer}
+.btn-toggle:hover{background:#f5e8d4}
+.btn-dl{font-family:system-ui,sans-serif;font-size:.8rem;color:var(--muted);text-decoration:none}
+.btn-dl:hover{color:var(--accent)}
+.part-summary{margin-top:12px;padding-top:12px;border-top:1px dashed var(--line);font-size:.95rem}
+.part-summary[hidden]{display:none}
+.part-summary .note{font-size:.82rem;color:var(--muted);font-style:italic;margin-top:8px}
+table.decoder{width:100%;border-collapse:collapse;font-size:.95rem}
+table.decoder th,table.decoder td{text-align:left;padding:12px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+table.decoder th{font-family:system-ui,sans-serif;font-size:.78rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);border-bottom:2px solid var(--accent-2)}
+table.decoder td:first-child{font-weight:700;white-space:nowrap}
+.tag{display:inline-block;font-family:system-ui,sans-serif;font-size:.72rem;padding:2px 10px;border-radius:12px;margin-top:6px}
+.tag.real{background:#dcead8;color:#2e5c2e}
+.tag.fiction{background:#f3ddcf;color:#8c4a1b}
+.tag.unconfirmed{background:#e8e4f0;color:#4a4a7a}
+.timeline{position:relative;padding-left:26px}
+.timeline:before{content:'';position:absolute;left:8px;top:6px;bottom:6px;width:2px;background:var(--accent-2)}
+.moment{position:relative;margin-bottom:26px}
+.moment:before{content:'';position:absolute;left:-24px;top:8px;width:12px;height:12px;border-radius:50%;background:var(--accent);border:2px solid var(--paper)}
+.moment .year{font-family:system-ui,sans-serif;font-weight:700;color:var(--accent);font-size:.9rem}
+.moment h4{margin:2px 0 6px;font-size:1.05rem}
+.moment p{font-size:.95rem;color:#3d362c}
+.callout{background:#f3e9d3;border-left:4px solid var(--accent-2);padding:18px 20px;border-radius:0 8px 8px 0;margin:24px 0;font-style:italic}
+footer{padding:36px 0;text-align:center;color:var(--muted);font-size:.85rem;font-family:system-ui,sans-serif}
+.lang-toggle{position:fixed;top:14px;right:14px;z-index:100;font-family:system-ui,sans-serif;font-size:.85rem;background:var(--card);border:1px solid var(--accent-2);color:var(--accent);border-radius:20px;padding:8px 18px;cursor:pointer;box-shadow:var(--shadow)}
+.lang-toggle:hover{background:#f5e8d4}
+[lang]{display:none}
+html[data-lang="es"] [lang="es"]{display:revert}
+html[data-lang="en"] [lang="en"]{display:revert}
+html[data-lang="es"] [lang="es"].block-el,html[data-lang="en"] [lang="en"].block-el{display:block}
+html[data-lang="es"] [lang="es"].inline-el,html[data-lang="en"] [lang="en"].inline-el{display:inline}
+@media(max-width:560px){
+  table.decoder td:first-child{white-space:normal}
+  section.block{padding:32px 0}
+}
+</style>
+</head>
+<body>
+<html data-lang="es" style="display:contents">
+<button class="lang-toggle" id="langToggle" type="button">English</button>
+
+<header class="mast">
+  <div class="wrap">
+    <p class="kicker" lang="es">Pugna a un dictador · 1987</p>
+    <p class="kicker" lang="en">Pugna a un dictador · 1987</p>
+    <h1 lang="es">El audiolibro de Mamá Tere</h1>
+    <h1 lang="en">Mama Tere's Audiobook</h1>
+    <p class="lede" lang="es">Guía del oyente: quién es quién, qué pasó realmente en abril de 1944, y cómo encaja el libro en la historia.</p>
+    <p class="lede" lang="en">A listener's guide: who's who, what really happened in April 1944, and how the book fits into history.</p>
+  </div>
+</header>
+
+<nav class="toc">
+  <div class="wrap">
+    <a href="#audiobook" lang="es">Audiolibro</a><a href="#audiobook" lang="en">Audiobook</a>
+    <a href="#decoder" lang="es">Quién es quién</a><a href="#decoder" lang="en">Name decoder</a>
+    <a href="#historia" lang="es">Lo que pasó</a><a href="#historia" lang="en">What happened</a>
+    <a href="#libro" lang="es">El libro</a><a href="#libro" lang="en">The book</a>
+  </div>
+</nav>
+
+<main class="wrap">
+
+<!-- AUDIOBOOK -->
+<section class="block" id="audiobook">
+  <h2 lang="es">Escuchar el audiolibro</h2>
+  <h2 lang="en">Listen to the audiobook</h2>
+  <p class="sub" lang="es">Diez partes, en español. Toque el + para ver el resumen de cada parte.</p>
+  <p class="sub" lang="en">Ten parts, in Spanish. Tap + to see each part's summary.</p>
+  <div id="parts"></div>
+</section>
+
+<!-- NAME DECODER -->
+<section class="block" id="decoder">
+  <h2 lang="es">Quién es quién</h2>
+  <h2 lang="en">Name decoder</h2>
+  <p class="sub" lang="es">El libro usa seudónimos. Aquí están las identidades reales — y cuáles son ficción.</p>
+  <p class="sub" lang="en">The book uses pseudonyms. Here are the real identities — and which are fiction.</p>
+  <table class="decoder">
+    <thead>
+      <tr>
+        <th lang="es">En el libro</th><th lang="en">In the book</th>
+        <th lang="es">Identidad real</th><th lang="en">Real identity</th>
+      </tr>
+    </thead>
+    <tbody id="decoderBody"></tbody>
+  </table>
+</section>
+
+<!-- WHAT HAPPENED -->
+<section class="block" id="historia">
+  <h2 lang="es">Lo que pasó — abril de 1944</h2>
+  <h2 lang="en">What happened — April 1944</h2>
+  <p class="sub" lang="es">El contexto histórico detrás del libro, en lenguaje sencillo.</p>
+  <p class="sub" lang="en">The historical context behind the book, in plain language.</p>
+  <div class="timeline" id="timeline"></div>
+</section>
+
+<!-- HOW THE BOOK FITS -->
+<section class="block" id="libro">
+  <h2 lang="es">Cómo encaja el libro</h2>
+  <h2 lang="en">How the book fits</h2>
+  <div lang="es">
+    <p><strong>Pugna a un dictador</strong> fue escrito por María Teresa González de Gavidia y publicado en 1987, más de cuarenta años después de los hechos que narra.</p>
+    <div class="callout">«Esa parte es lo que pudo haber sido y no fue.»<br>— María Teresa, sobre la Tercera Parte</div>
+    <p><strong>Primera y Segunda Parte — memoria.</strong> La historia real: su juventud, su matrimonio con el capitán Carlos Gavidia Castro, el levantamiento del 2 de abril de 1944, su lucha por salvarle la vida, su ejecución y las consecuencias.</p>
+    <p><strong>Tercera Parte — ficción.</strong> Una vida imaginada que nunca ocurrió. El personaje de «Roberto» es inventado. María Teresa nunca se casó con él en la vida real. La identidad de su verdadero segundo esposo sigue sin confirmarse.</p>
+    <p>El libro mezcla memoria novelada con nombres cambiados para proteger a personas reales. Esta guía existe para que quien escuche sepa distinguir lo vivido de lo imaginado.</p>
+  </div>
+  <div lang="en">
+    <p><strong>Pugna a un dictador</strong> was written by María Teresa González de Gavidia and published in 1987, more than forty years after the events it narrates.</p>
+    <div class="callout">"That part is what could have been and wasn't."<br>— María Teresa, on Part Three</div>
+    <p><strong>Parts One and Two — memoir.</strong> The true story: her youth, her marriage to Capitán Carlos Gavidia Castro, the April 2, 1944 uprising, her fight to save his life, his execution, and the aftermath.</p>
+    <p><strong>Part Three — fiction.</strong> An imagined life that never happened. The character "Roberto" is invented. María Teresa never married him in real life. Her real second husband's identity remains unconfirmed.</p>
+    <p>The book blends novelized memoir with changed names to protect real people. This guide exists so listeners can tell what was lived from what was imagined.</p>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <p lang="es">Guía familiar privada · No indexada en buscadores</p>
+  <p lang="en">Private family guide · Not indexed by search engines</p>
+</footer>
+
+<script>
+var LANG = 'es';
+document.documentElement.setAttribute('data-lang', 'es');
+var langToggle = document.getElementById('langToggle');
+langToggle.addEventListener('click', function(){
+  LANG = (LANG === 'es') ? 'en' : 'es';
+  document.documentElement.setAttribute('data-lang', LANG);
+  document.documentElement.setAttribute('lang', LANG);
+  langToggle.textContent = (LANG === 'es') ? 'English' : 'Español';
+  document.title = (LANG === 'es') ? 'Audiolibro de Mamá Tere — Guía del oyente' : "Mama Tere's Audiobook — Listener's Guide";
+  renderParts(); renderDecoder(); renderTimeline();
+});
+
+/* ---------- AUDIOBOOK PARTS ---------- */
+var PARTS = [
+ {n:1, min:'57.3', pg_es:'Nota de la autora y Primera Parte, págs. 1–15', pg_en:'Author\'s note and Part One, pp. 1–15',
+  es:'El libro abre con la dedicatoria de la autora a su esposo y a los jóvenes oficiales ejecutados tras el levantamiento de abril de 1944. Comienza la novela: María, de 15 años, pobre y empleada en una tienda, rechaza la propuesta del joven adinerado Roberto antes de que él ingrese a la Escuela Militar. En una fiesta de Navidad conoce a Carlos, un apuesto cadete, y se enamora perdidamente.',
+  en:'The book opens with the author\'s dedication to her husband and the young officers executed after the April 1944 uprising. The novel begins: María, 15, poor and working in a shop, rejects the proposal of wealthy young Roberto before he enters the Military Academy. At a Christmas party she meets Carlos, a handsome cadet, and falls deeply in love.'},
+ {n:2, min:'53.9', pg_es:'Primera Parte, págs. 16–32', pg_en:'Part One, pp. 16–32',
+  es:'En la fiesta de Año Nuevo de la familia Romo, Marta —hija del patrón y la «novia elegida»— también desea a Carlos. Cuando se apagan las luces a medianoche, Carlos besa a María por error y comienza su romance secreto. Marta los delata ante los orgullosos padres de Carlos, quienes amenazan con desheredarlo, y hace que despidan a María. Ella encuentra trabajo en una librería y Carlos promete que nada salvo la muerte los separará.',
+  en:'At the Romo family\'s New Year party, Marta — the patron\'s daughter and the "chosen bride" — also wants Carlos. When the lights go out at midnight, Carlos kisses María by mistake and their secret romance begins. Marta betrays them to Carlos\'s proud parents, who threaten to disinherit him, and gets María fired. She finds work in a bookshop, and Carlos promises nothing but death will separate them.'},
+ {n:3, min:'54.6', pg_es:'Primera Parte, págs. 33–50', pg_en:'Part One, pp. 33–50',
+  es:'Carlos se gradúa con la IV Promoción mientras Marta coloca sus estrellas de oficial y María es coronada Reina de los Cadetes. En la casa de campo su amor se profundiza y él promete casarse; poco después le telegrafía: «Ingresé como alumno a la aviación». Su madre amenaza con enviarlo a Europa si sigue viendo a María; él la desafía.',
+  en:'Carlos graduates with the IV promotion while Marta pins on his officer\'s stars and María is crowned Queen of the Cadets. At the country house their love deepens and he promises to marry her; soon after he telegraphs: "I entered aviation school." His mother threatens to send him to Europe if he keeps seeing María; he defies her.'},
+ {n:4, min:'51.0', pg_es:'Primera Parte, págs. 51–68', pg_en:'Part One, pp. 51–68',
+  es:'Carlos y María se casan en una discreta ceremonia civil y alquilan una pequeña casa; nace su primer hijo. Carlos es obligado a presenciar el injusto consejo de guerra y la ejecución de un compañero, hecho que lo persigue y le revela la crueldad del régimen. Muere el padre de María, Carlos asciende a teniente y se gradúa como el mejor piloto de su clase.',
+  en:'Carlos and María marry in a quiet civil ceremony and rent a small house; their first son is born. Carlos is forced to witness a comrade\'s unjust court-martial and execution, which haunts him and reveals the regime\'s cruelty. María\'s father dies, Carlos is promoted to lieutenant and graduates top pilot of his class.'},
+ {n:5, min:'53.2', pg_es:'Primera Parte, págs. 69–86', pg_en:'Part One, pp. 69–86',
+  es:'Roberto se casa con Ana y se vuelve frío; Carlos asciende a capitán mientras la pareja celebra siete años de matrimonio. Una cena privada de aniversario es denunciada falsamente como conspiración y Carlos es expulsado de la aviación militar. Se retira a administrar la hacienda familiar mientras su padre, don José, muere de forma repentina. Ella espera su cuarto hijo cuando Carlos recibe una orden misteriosa: la revolución está comenzando.',
+  en:'Roberto marries Ana and grows cold; Carlos is promoted to captain as the couple celebrates seven years of marriage. A private anniversary dinner is falsely denounced as conspiracy and Carlos is expelled from military aviation. He retires to manage the family hacienda while his father, don José, dies suddenly. She is expecting their fourth child when Carlos receives a mysterious order: the revolution is beginning.'},
+ {n:6, min:'55.5', pg_es:'Primera Parte, págs. 87–89, y Segunda Parte, págs. 90–104', pg_en:'Part One, pp. 87–89, and Part Two, pp. 90–104',
+  es:'El 2 de abril de 1944 estalla el levantamiento. Carlos comanda tropas rebeldes, pero las bombas no explotan; combate en retirada por los cañaverales hasta la hacienda y luego huye hacia la frontera con Honduras. María es interrogada; Paco es juzgado por el primer Consejo de Guerra y ejecutado el 10 de abril. Traicionado cerca de la frontera, Carlos es capturado.',
+  en:'On April 2, 1944 the uprising erupts. Carlos commands rebel troops, but the bombs fail to explode; he fights a losing retreat through cane fields to the hacienda, then flees toward the Honduran border. María is interrogated; Paco is tried by the first Council of War and executed April 10. Betrayed near the border, Carlos is captured.'},
+ {n:7, min:'54.9', pg_es:'Segunda Parte, págs. 105–121', pg_en:'Part Two, pp. 105–121',
+  es:'María visita a Carlos en prisión y encuentra sus manos lastimadas por la tortura. Roberto, integrante secreto del consejo de guerra, la ayuda: organiza la visita y le entrega una petición por la vida de Carlos. En el segundo Consejo de Guerra, Carlos se defiende con orgullo; el jurado vota cuatro por la muerte y tres por el exilio, pero el presidente firma la sentencia. Carlos pide un último favor: casarse con María por la Iglesia. Al amanecer la llevan para la boda y la despedida.',
+  en:'María visits Carlos in prison and finds his hands injured from torture. Roberto, secretly on the war council, helps her: he arranges the visit and gives her a petition for Carlos\'s life. At the second Council of War, Carlos defends himself proudly; the jury votes four for death and three for exile, but the president signs the sentence. Carlos asks one last favor: to marry María in the Church. At dawn they bring her for the wedding and farewell.'},
+ {n:8, min:'53.5', pg_es:'Segunda Parte, págs. 122–136, Epílogo y Tercera Parte, págs. 137–138', pg_en:'Part Two, pp. 122–136, Epilogue and Part Three, pp. 137–138',
+  es:'Carlos enfrenta al pelotón con la cabeza en alto —«Muero por mi patria; perdono a todos»— y el nombre de María en los labios; se leen sus cartas de despedida. La huelga estudiantil se convierte en la «huelga de brazos caídos» nacional y Hernández Martínez huye a Guatemala. María guarda luto y visita el cementerio a diario; su cabello se vuelve blanco. Dos años después, Roberto, ya viudo, corteja a María. — NOTA: desde aquí, la Tercera Parte es ficción.',
+  en:'Carlos faces the firing squad head high — "I die for my country; I forgive everyone" — with María\'s name on his lips; his farewell letters are read. The student strike becomes the national "strike of fallen arms" and Hernández Martínez flees to Guatemala. María mourns and visits the cemetery daily; her hair turns white. Two years later, widowed Roberto courts María. — NOTE: from here, Part Three is fiction.'},
+ {n:9, min:'55.1', pg_es:'Tercera Parte, págs. 139–157', pg_en:'Part Three, pp. 139–157',
+  es:'María se casa con Roberto y se instalan en «Quinta Santa María»; nace su hija Elizabeth y los tres hijos de Carlos parten a estudiar a Estados Unidos. Roberto asciende a coronel y candidato ministerial mientras María realiza obras benéficas, hasta que una noche de borrachera y sus celos casi destruyen el matrimonio; finalmente se reconcilian. — FICCIÓN: esto nunca ocurrió.',
+  en:'María marries Roberto and they settle at "Quinta Santa María"; their daughter Elizabeth is born and Carlos\'s three sons leave to study in the United States. Roberto rises to colonel and ministerial candidate while María does charity work, until a drunken night and his jealousy nearly destroy the marriage; they finally reconcile. — FICTION: this never happened.'},
+ {n:10, min:'53.5', pg_es:'Tercera Parte, págs. 158–176', pg_en:'Part Three, pp. 158–176',
+  es:'Roberto se endurece como ministro, pero cuando dos coroneles enfrentan la ejecución por una nueva conspiración, María lo desafía, suplica personalmente al presidente y les salva la vida. Pasa un año en Estados Unidos con sus hijos, regresa y logra que el presidente indulte a los exiliados. Nace un sexto hijo; Roberto renuncia para llevar una vida tranquila. Treinta años después de la muerte de Carlos, María todavía lleva flores frescas a su tumba. — FICCIÓN: esto nunca ocurrió.',
+  en:'Roberto hardens as a minister, but when two colonels face execution for a new conspiracy, María defies him, pleads personally with the president and saves their lives. She spends a year in the United States with her children, returns and gets the president to pardon the exiles. A sixth child is born; Roberto resigns for a quiet life. Thirty years after Carlos\'s death, María still brings fresh flowers to his grave. — FICTION: this never happened.'}
+];
+
+function esc(s){var d=document.createElement('div');d.textContent=s;return d.innerHTML;}
+function renderParts(){
+  var c = document.getElementById('parts'); c.innerHTML='';
+  PARTS.forEach(function(p){
+    var num = String(p.n).padStart(2,'0');
+    var art = document.createElement('article'); art.className='audio-part';
+    var title = (LANG==='es' ? 'Parte ' : 'Part ') + p.n;
+    var pg = (LANG==='es' ? p.pg_es : p.pg_en);
+    var sum = (LANG==='es' ? p.es : p.en);
+    var dl = (LANG==='es' ? 'Descargar Parte ' : 'Download Part ') + p.n;
+    var sumLabel = (LANG==='es' ? 'Resumen' : 'Summary');
+    var showSum = (LANG==='es' ? 'Mostrar resumen de la Parte ' : 'Show summary for Part ') + p.n;
+    var noAudio = (LANG==='es' ? 'Su navegador no admite la reproducción de audio.' : 'Your browser does not support audio playback.');
+    art.innerHTML =
+      '<h3>'+esc(title)+'</h3>'+
+      '<p class="meta">Español · '+esc(p.min)+' min · '+esc(pg)+'</p>'+
+      '<audio controls preload="none"><source src="assets/audiobook-es/part-'+num+'.mp3" type="audio/mpeg">'+esc(noAudio)+'</audio>'+
+      '<div class="row"><button class="btn-toggle" type="button" aria-expanded="false">'+ '+ ' + esc(sumLabel) +'</button>'+
+      '<a class="btn-dl" href="assets/audiobook-es/part-'+num+'.mp3" download>'+esc(dl)+'</a></div>'+
+      '<div class="part-summary" hidden><p>'+esc(sum)+'</p><p class="note">'+esc(LANG==='es'?'Memoria novelada · los nombres son seudónimos · los límites de cada parte son aproximados.':'Novelized memoir · names are pseudonyms · part boundaries are approximate.')+'</p></div>';
+    var btn = art.querySelector('.btn-toggle');
+    var box = art.querySelector('.part-summary');
+    btn.addEventListener('click', function(){
+      var open = box.hidden;
+      box.hidden = !open;
+      btn.setAttribute('aria-expanded', String(open));
+      btn.textContent = (open ? '− ' : '+ ') + sumLabel;
+    });
+    c.appendChild(art);
+  });
+}
+
+/* ---------- NAME DECODER ---------- */
+var DECODER = [
+ {book:'«Roberto» / Capitán Ocampo', real_es:'Personaje ficticio — la Tercera Parte nunca ocurrió', real_en:'Fictional character — Part Three never happened', tag:'fiction', tag_es:'Ficción', tag_en:'Fiction'},
+ {book:'«Don José»', real_es:'José Gavidia, el bisabuelo — padre del capitán', real_en:'José Gavidia, the great-grandfather — the captain\'s father', tag:'real', tag_es:'Real', tag_en:'Real'},
+ {book:'«Doña Carmela»', real_es:'Carlota Castro de Gavidia, la bisabuela — madre del capitán', real_en:'Carlota Castro de Gavidia, the great-grandmother — the captain\'s mother', tag:'real', tag_es:'Real', tag_en:'Real'},
+ {book:'«Don Juan»', real_es:'José Cipriano Castro Bernal, tío del capitán — exiliado en 1938', real_en:'José Cipriano Castro Bernal, the captain\'s uncle — exiled in 1938', tag:'real', tag_es:'Real', tag_en:'Real'},
+ {book:'«Marta»', real_es:'Posiblemente Coralia de Lemus — sin confirmar (hay discrepancia en el año de nacimiento)', real_en:'Possibly Coralia de Lemus — unconfirmed (birth-year discrepancy)', tag:'unconfirmed', tag_es:'Sin confirmar', tag_en:'Unconfirmed'},
+ {book:'«Flores Magaña»', real_es:'Capitán Manuel Sánchez Dueñas (según Tirana memoria)', real_en:'Capitán Manuel Sánchez Dueñas (per Tirana memoria)', tag:'real', tag_es:'Real', tag_en:'Real'},
+ {book:'La familia «Romo»', real_es:'Los Gavidia', real_en:'The Gavidias', tag:'real', tag_es:'Real', tag_en:'Real'},
+ {book:'«Delia»', real_es:'Probablemente ficticia — aparece como madre de dos personas distintas', real_en:'Likely fictional — appears as mother of two different people', tag:'fiction', tag_es:'Ficción', tag_en:'Fiction'}
+];
+function renderDecoder(){
+  var b = document.getElementById('decoderBody'); b.innerHTML='';
+  DECODER.forEach(function(d){
+    var tr = document.createElement('tr');
+    var real = (LANG==='es' ? d.real_es : d.real_en);
+    var tag = (LANG==='es' ? d.tag_es : d.tag_en);
+    tr.innerHTML = '<td>'+esc(d.book)+'</td><td>'+esc(real)+'<br><span class="tag '+d.tag+'">'+esc(tag)+'</span></td>';
+    b.appendChild(tr);
+  });
+}
+
+/* ---------- TIMELINE ---------- */
+var TIMELINE = [
+ {y:'1931–1944', t_es:'La dictadura', t_en:'The dictatorship',
+  d_es:'El general Maximiliano Hernández Martínez gobierna El Salvador con mano dura durante trece años. La disidencia se castiga con cárcel, exilio o muerte.',
+  d_en:'General Maximiliano Hernández Martínez rules El Salvador with an iron fist for thirteen years. Dissent is punished with prison, exile, or death.'},
+ {y:'2–3 abr 1944', t_es:'El levantamiento', t_en:'The uprising',
+  d_es:'Un grupo de oficiales jóvenes se rebela contra Martínez. El capitán Carlos Gavidia Castro, piloto aviador, se une a la rebelión. El alzamiento fracasa en dos días.',
+  d_en:'A group of young officers rebels against Martínez. Capitán Carlos Gavidia Castro, a military pilot, joins the uprising. It fails within two days.'},
+ {y:'abr 1944', t_es:'Los consejos de guerra', t_en:'The courts-martial',
+  d_es:'Los participantes capturados son juzgados por consejos de guerra. El hermano del capitán, José Antonio, es ejecutado el 10 de abril. El capitán es condenado por un segundo consejo.',
+  d_en:'Captured participants are tried by courts-martial. The captain\'s brother, José Antonio, is executed April 10. The captain is condemned by a second council.'},
+ {y:'24/26 abr 1944', t_es:'La ejecución', t_en:'The execution',
+  d_es:'El capitán Carlos Gavidia Castro es fusilado al amanecer. La mañana de la ejecución se casa con María Teresa por la Iglesia, en artículo de muerte. Ella queda viuda con cuatro hijos y embarazada del quinto.',
+  d_en:'Capitán Carlos Gavidia Castro is executed by firing squad at dawn. On the morning of the execution he marries María Teresa in the Church, in articulo mortis. She is left a widow with four children, pregnant with a fifth.'},
+ {y:'mayo 1944', t_es:'Cae el dictador', t_en:'The dictator falls',
+  d_es:'Una huelga general —la «huelga de brazos caídos»— paraliza el país. Hernández Martínez renuncia y huye a Guatemala. Pero para María Teresa, la victoria llega demasiado tarde.',
+  d_en:'A general strike — the "strike of fallen arms" — paralyzes the country. Hernández Martínez resigns and flees to Guatemala. But for María Teresa, victory comes too late.'},
+ {y:'1987', t_es:'El libro', t_en:'The book',
+  d_es:'Cuarenta y tres años después, María Teresa publica Pugna a un dictador: su memoria de lo vivido, con nombres cambiados — y una tercera parte imaginada de la vida que pudo haber sido.',
+  d_en:'Forty-three years later, María Teresa publishes Pugna a un dictador: her memoir of what she lived, with names changed — and an imagined third part about the life that might have been.'}
+];
+function renderTimeline(){
+  var t = document.getElementById('timeline'); t.innerHTML='';
+  TIMELINE.forEach(function(m){
+    var div = document.createElement('div'); div.className='moment';
+    div.innerHTML = '<span class="year">'+esc(m.y)+'</span><h4>'+esc(LANG==='es'?m.t_es:m.t_en)+'</h4><p>'+esc(LANG==='es'?m.d_es:m.d_en)+'</p>';
+    t.appendChild(div);
+  });
+}
+
+renderParts(); renderDecoder(); renderTimeline();
+</script>
+</html>
