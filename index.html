@@ -35,6 +35,10 @@ section.block .sub{color:var(--muted);margin-bottom:22px;font-style:italic}
 .btn-toggle:hover{background:#f5e8d4}
 .btn-dl{font-family:system-ui,sans-serif;font-size:.8rem;color:var(--muted);text-decoration:none}
 .btn-dl:hover{color:var(--accent)}
+.audio-tabs{display:flex;gap:10px;margin-bottom:18px}
+.audio-tab{font-family:system-ui,sans-serif;font-size:.85rem;font-weight:600;background:none;border:1px solid var(--accent-2);color:var(--accent);border-radius:20px;padding:8px 22px;cursor:pointer}
+.audio-tab.active{background:var(--accent);border-color:var(--accent);color:#fff}
+.audio-tab:not(.active):hover{background:#f5e8d4}
 .part-summary{margin-top:12px;padding-top:12px;border-top:1px dashed var(--line);font-size:.95rem}
 .part-summary[hidden]{display:none}
 .part-summary .note{font-size:.82rem;color:var(--muted);font-style:italic;margin-top:8px}
@@ -99,9 +103,14 @@ html[data-lang="es"] [lang="es"].inline-el,html[data-lang="en"] [lang="en"].inli
 <section class="block" id="audiobook">
   <h2 lang="es">Escuchar el audiolibro</h2>
   <h2 lang="en">Listen to the audiobook</h2>
-  <p class="sub" lang="es">Diez partes, en español. Toque el + para ver el resumen de cada parte.</p>
-  <p class="sub" lang="en">Ten parts, in Spanish. Tap + to see each part's summary.</p>
-  <div id="parts"></div>
+  <p class="sub" lang="es">Diez partes en cada idioma. Elija el idioma y toque el + para ver el resumen de cada parte.</p>
+  <p class="sub" lang="en">Ten parts in each language. Pick a language, then tap + to see each part's summary.</p>
+  <div class="audio-tabs" role="tablist">
+    <button type="button" class="audio-tab active" id="tabEs" role="tab">Español</button>
+    <button type="button" class="audio-tab" id="tabEn" role="tab">English</button>
+  </div>
+  <div id="parts-es" role="tabpanel"></div>
+  <div id="parts-en" role="tabpanel" style="display:none"></div>
 </section>
 
 <!-- NAME DECODER -->
@@ -189,7 +198,7 @@ langToggle.addEventListener('click', function(){
   document.documentElement.setAttribute('lang', LANG);
   langToggle.textContent = (LANG === 'es') ? 'English' : 'Español';
   document.title = (LANG === 'es') ? 'Audiolibro de Mamá Tere — Guía del oyente' : "Mama Tere's Audiobook — Listener's Guide";
-  renderParts(); renderDecoder(); renderTimeline();
+  renderAudiobook(); renderDecoder(); renderTimeline();
 });
 
 /* ---------- AUDIOBOOK PARTS ---------- */
@@ -227,32 +236,47 @@ var PARTS = [
 ];
 
 function esc(s){var d=document.createElement('div');d.textContent=s;return d.innerHTML;}
-function renderParts(){
-  var c = document.getElementById('parts'); c.innerHTML='';
+var AUDIO_LANG = 'es';
+function renderAudiobook(){
+  renderPartsInto('parts-es','audiobook-es','es');
+  renderPartsInto('parts-en','audiobook-en','en');
+  applyAudioTab();
+}
+function applyAudioTab(){
+  var showEs = (AUDIO_LANG === 'es');
+  document.getElementById('parts-es').style.display = showEs ? 'block' : 'none';
+  document.getElementById('parts-en').style.display = showEs ? 'none' : 'block';
+  document.getElementById('tabEs').className = 'audio-tab' + (showEs ? ' active' : '');
+  document.getElementById('tabEn').className = 'audio-tab' + (showEs ? '' : ' active');
+}
+document.getElementById('tabEs').addEventListener('click', function(){ AUDIO_LANG = 'es'; applyAudioTab(); });
+document.getElementById('tabEn').addEventListener('click', function(){ AUDIO_LANG = 'en'; applyAudioTab(); });
+function renderPartsInto(containerId, folder, audioLang){
+  var c = document.getElementById(containerId); c.innerHTML='';
   PARTS.forEach(function(p){
     var num = String(p.n).padStart(2,'0');
     var art = document.createElement('article'); art.className='audio-part';
     var title = (LANG==='es' ? 'Parte ' : 'Part ') + p.n;
     var pg = (LANG==='es' ? p.pg_es : p.pg_en);
-    var sum = (LANG==='es' ? p.es : p.en);
+    var sum = (audioLang==='es' ? p.es : p.en);
+    var audioName = (audioLang==='es' ? 'Espa\u00f1ol' : 'English');
     var dl = (LANG==='es' ? 'Descargar Parte ' : 'Download Part ') + p.n;
     var sumLabel = (LANG==='es' ? 'Resumen' : 'Summary');
-    var showSum = (LANG==='es' ? 'Mostrar resumen de la Parte ' : 'Show summary for Part ') + p.n;
-    var noAudio = (LANG==='es' ? 'Su navegador no admite la reproducción de audio.' : 'Your browser does not support audio playback.');
+    var noAudio = (LANG==='es' ? 'Su navegador no admite la reproducci\u00f3n de audio.' : 'Your browser does not support audio playback.');
     art.innerHTML =
       '<h3>'+esc(title)+'</h3>'+
-      '<p class="meta">Español · '+esc(p.min)+' min · '+esc(pg)+'</p>'+
-      '<audio controls preload="none"><source src="assets/audiobook-es/part-'+num+'.mp3" type="audio/mpeg">'+esc(noAudio)+'</audio>'+
+      '<p class="meta">'+esc(audioName)+' \u00b7 '+esc(p.min)+' min \u00b7 '+esc(pg)+'</p>'+
+      '<audio controls preload="none"><source src="assets/'+folder+'/part-'+num+'.mp3" type="audio/mpeg">'+esc(noAudio)+'</audio>'+
       '<div class="row"><button class="btn-toggle" type="button" aria-expanded="false">'+ '+ ' + esc(sumLabel) +'</button>'+
-      '<a class="btn-dl" href="assets/audiobook-es/part-'+num+'.mp3" download>'+esc(dl)+'</a></div>'+
-      '<div class="part-summary" hidden><p>'+esc(sum)+'</p><p class="note">'+esc(LANG==='es'?'Memoria novelada · los nombres son seudónimos · los límites de cada parte son aproximados.':'Novelized memoir · names are pseudonyms · part boundaries are approximate.')+'</p></div>';
+      '<a class="btn-dl" href="assets/'+folder+'/part-'+num+'.mp3" download>'+esc(dl)+'</a></div>'+
+      '<div class="part-summary" hidden><p>'+esc(sum)+'</p><p class="note">'+esc(LANG==='es'?'Memoria novelada \u00b7 los nombres son seud\u00f3nimos \u00b7 los l\u00edmites de cada parte son aproximados.':'Novelized memoir \u00b7 names are pseudonyms \u00b7 part boundaries are approximate.')+'</p></div>';
     var btn = art.querySelector('.btn-toggle');
     var box = art.querySelector('.part-summary');
     btn.addEventListener('click', function(){
       var open = box.hidden;
       box.hidden = !open;
       btn.setAttribute('aria-expanded', String(open));
-      btn.textContent = (open ? '− ' : '+ ') + sumLabel;
+      btn.textContent = (open ? '\u2212 ' : '+ ') + sumLabel;
     });
     c.appendChild(art);
   });
@@ -310,6 +334,6 @@ function renderTimeline(){
   });
 }
 
-renderParts(); renderDecoder(); renderTimeline();
+renderAudiobook(); renderDecoder(); renderTimeline();
 </script>
 </html>
